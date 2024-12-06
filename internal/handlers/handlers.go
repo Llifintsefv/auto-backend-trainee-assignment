@@ -5,6 +5,8 @@ import (
 	"auto-backend-trainee-assignment/internal/service"
 	"encoding/json"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 type Handler interface {
@@ -42,8 +44,18 @@ func (h *handler)ShortenHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *handler)RedirectHandler(w http.ResponseWriter, r *http.Request){
-	if r.Method != http.MethodPost {
+	if r.Method != http.MethodGet {
 		http.Error(w,"method not allowed",http.StatusMethodNotAllowed)
 		return
 	}
+
+	params := mux.Vars(r)
+	ShortUrl := params["shortURL"]
+	LongUrl,err := h.service.GetLongUrl(ShortUrl)
+	if err != nil {
+
+	} 
+
+	http.Redirect(w, r, LongUrl, http.StatusSeeOther)
+
 }
