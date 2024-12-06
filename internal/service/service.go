@@ -73,7 +73,7 @@ func GenShortUrl() (string) {
 
 
 func isValidCustomUrl(customUrl string) bool {
-    // Регулярное выражение: допускаются только буквы, цифры, дефисы и подчеркивания
+
     validUrlPattern := `^[a-zA-Z0-9_-]+$`
     match, _ := regexp.MatchString(validUrlPattern, customUrl)
     return match
