@@ -28,7 +28,7 @@ func InitDB(connStr string) (*sql.DB, error) {
 		return nil, fmt.Errorf("failed to ping db: %w", err)
 	}
 
-	_, err = db.Exec("CREATE TABLE IF NOT EXISTS ShortUrl (id SERIAL PRIMARY KEY,LongUrl TEXT, ShortUrl TEXT)")
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS urls (id SERIAL PRIMARY KEY,LongUrl TEXT, ShortUrl TEXT)")
 	if err != nil {
 		return nil, fmt.Errorf("failed to create table: %w", err)
 	}
